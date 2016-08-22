@@ -1,0 +1,90 @@
+package com.zjlppz.dao;
+
+import java.util.List;
+
+import com.zjlppz.bean.Car;
+import com.zjlppz.bean.User;
+import com.zjlppz.util.JDBCUtilTemplate;
+
+/**
+ * 购物车数据库操作类
+ * 
+ * @创建作者：周健
+ * @创建时间：2016-8-19
+ * @创建版本：1.0
+ * 
+ * @修改者：
+ * @修改版本：
+ * @修改时间：
+ * @修改描述：
+ * @历史版本：
+ */
+public class CarDaoImpl {
+
+	/**
+	 * 为用户购物车中插入新的数据
+	 * 插入该用户新的购物车数据
+	 * @param car
+	 * @return
+	 */
+	public int savecar(Car car) {
+
+		String sqlinsert = "insert into cars(carid,userid,goodsid,goodsnum)"
+				+ " values(SEQ_CARSID.nextval,?,?,?)";
+		int resNum = JDBCUtilTemplate.insert(sqlinsert, car.getUserId(),
+				car.getGoodsId(), car.getGoodsNum());
+		return resNum;
+	}
+
+	/**
+	 * 删除该用户购物车中某条商品信息
+	 * @param car
+	 * @return
+	 */
+	public int deletCar(Car car) {
+		String sqldelete = "delete * from cars where userid = ? and goodsid = ?";
+		int resNum = JDBCUtilTemplate.delete(sqldelete, car.getUserId(),
+				car.getGoodsId());
+		return resNum;
+	}
+	
+	/**
+	 * 删除用户购物车中所有的商品信息
+	 * @param user
+	 * @return
+	 */
+	public int deletAllCar(User user){
+		String sqlDelete = "delete * from cars where userid = ?";
+		int resNum = JDBCUtilTemplate.delete(sqlDelete, user.getUserId());
+		return resNum;
+	}
+
+	/**
+	 * 修改用户购物车中该商品信息（即修改数量）
+	 * @param car
+	 * @return
+	 */
+	public int updateCar(Car car){
+		String sqlUpdate = "update cars set goodsnum = ? where userid = ? and goodsid = ?";
+		int resNum = JDBCUtilTemplate.update(sqlUpdate, car.getGoodsNum(),car.getUserId(),car.getGoodsId());
+		return resNum;
+	}
+
+	/**
+	 * 获取用户的购物车信息
+	 * @param user
+	 * @return List<Car> cars
+	 */
+	public List<Car> getUserCars(User user) {
+		String sqlcount = "select * from cars where userid = ?";
+		List<Car> cars = null;
+		try {
+			cars = JDBCUtilTemplate.queryData(sqlcount, Car.class,
+					user.getUserId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return cars;
+	}
+
+}

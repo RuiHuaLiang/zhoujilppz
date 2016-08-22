@@ -1,0 +1,28 @@
+package com.zjlppz.services ;
+
+import com.zjlppz.bean.User ;
+import com.zjlppz.dao.CarDaoImpl ;
+
+/**
+ * 首页初始化业务逻辑类
+ * 
+ * @author liangruihua
+ * 
+ */
+public class IndexService
+{
+	CarDaoImpl carDao = new CarDaoImpl ( ) ;
+
+	/**
+	 * 获取购物车的商品数
+	 * 
+	 * @param user
+	 *            用户对象
+	 * @return 商品数
+	 */
+	public int getCarItemsCount ( User user )
+	{
+		return carDao.getUserCars ( user ).size ( ) ;
+	}
+
+}

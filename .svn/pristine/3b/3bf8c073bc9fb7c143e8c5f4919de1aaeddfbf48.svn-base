@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sql-mapping SYSTEM "sql-mapping.dtd" >
+<sql-mapping>
+  <session-factory>
+  	<property name="connect.driver">oracle.jdbc.driver.OracleDriver</property>
+    <property name="connect.url">jdbc:oracle:thin:@127.0.0.1:1521:ORCL</property>
+	<property name="connect.username">zjlppz</property>
+	<property name="connect.password">zjlppz123</property>
+  </session-factory>
+</sql-mapping>
