@@ -43,7 +43,8 @@ $(function(){
 	});
 
 	$("#info li:first ").mouseenter(function(){
-		$("#info li a img").attr("src","./img/list2.png");
+		var urlPath = $("#info li a img").attr("src");
+		$("#info li a img").attr("src",urlPath.replace('1','2'));
 		$(this).css({
 			"border": "1px solid #E7E7E7",
 			"border-bottom": "1px solid white"
@@ -55,7 +56,8 @@ $(function(){
 		$("#UserInfo").css({display: "block"});
 	});
 	$("#info li:first ").mouseleave(function(){
-		$("#info li a img").attr("src","./img/list1.png");
+		var urlPath = $("#info li a img").attr("src");
+		$("#info li a img").attr("src",urlPath.replace('2','1'));
 		$(this).css({
 			"border": "1px solid white",
 			"border-bottom": "1px solid #E7E7E7"
@@ -66,7 +68,7 @@ $(function(){
 		$("#UserInfo").css({display: "none"});
 	});
 
-
+	//搜索框效果处理
 	$("#searchText").focus(function(){
 
 		if($(this).val().trim()=="商品关键字"){
@@ -78,15 +80,7 @@ $(function(){
 			$(this).val("商品关键字");
 		}
 	});
-//图片轮播的数字排放
-	for(var i = 0 ; i < $(".number").length ; i ++)
-	{
-		var str = "#number" + (i + 1);
-		var l = 250 + (i + 1) * 50;
-		$(str).css({
-			"left": l + "px"
-		});
-	}
+
 
 
 
@@ -103,6 +97,15 @@ $(function(){
 		},10);
 	});
 
+	//图片轮播的数字排放
+	for(var i = 0 ; i < $(".number").length ; i ++)
+	{
+		var str = "#number" + (i + 1);
+		var l = 250 + (i + 1) * 50;
+		$(str).css({
+			"left": l + "px"
+		});
+	}
 	intervaId = setInterval(function () {
 		imgIndex++;
 		if(imgIndex > $(".number").length-1){
@@ -124,5 +127,21 @@ $(function(){
 		//	background: "#002535"
 		//});
 	});
+
+
+	//简版购物车表格处理
+	$("#goodsItem tr:gt(0)").mouseover(function(){
+		$(this).css({
+			background: "#002535"
+		});
+	});
+
+	$("#goodsItem tr:gt(0)").mouseleave(function(){
+		$(this).css({
+			background: "#0C1021"
+		});
+	});
+
+
 });
 

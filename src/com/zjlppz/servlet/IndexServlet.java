@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletResponse ;
 import javax.servlet.http.HttpSession ;
 
 import com.zjlppz.bean.Car ;
+import com.zjlppz.bean.Category ;
 import com.zjlppz.bean.User ;
+import com.zjlppz.bean.viewbean.CategoryGoods ;
 import com.zjlppz.services.IndexService ;
 
 public class IndexServlet extends HttpServlet
@@ -79,6 +81,12 @@ public class IndexServlet extends HttpServlet
 			carItems = indexService.getCarItemsCount ( user ) ;
 			System.out.println (carItems) ;
 			request.setAttribute ( "carItems" , carItems );
+			
+			List<Category> categorys = indexService.getCategory ( null );
+			request.setAttribute ( "categorys" , categorys );
+			
+			List<CategoryGoods> categoryGoods = indexService.getCategoryGoods ( null , 1 , 5 );
+			request.setAttribute ( "categoryGoods" , categoryGoods );
 			
 		} catch ( Exception e )
 		{
