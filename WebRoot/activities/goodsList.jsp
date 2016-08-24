@@ -9,15 +9,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>周记梁品铺子</title>
+	<title>搜索页</title>
 	<link rel="stylesheet" href="<%=path%>/activities/css/reset.css"/>
+	<link rel="stylesheet" href="<%=path%>/activities/css/search.css"/>
 	<link rel="stylesheet" href="<%=path%>/activities/css/comment.css"/>
-	<link rel="stylesheet" href="<%=path%>/activities/css/main.css"/>
 	<script src="<%=path%>/activities/js/jquery-2.1.4.js"></script>
 	<script src="<%=path%>/activities/js/main.js"></script>
-	<script src="<%=path%>/activities/js/categoryManage.js"></script>
 </head>
 <body>
+
 	<div id="rightToolBar">
 		<ul>
 			<li><a href="#">购物车</a><span class="circleRed">${carItems.size()}</span></li>
@@ -34,7 +34,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</li>
 		</ul>
 	</div>
-	<div id="header">
+		<div id="header">
 		<div id="toolBar">
 			<div id="toolBarContent">
 				<ul id="welCome">
@@ -141,28 +141,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<a href="#">松子</a>
 					</div>
 					<div id="searchInput">
-						<form action="<%=path%>/GoodsServlet" method="post">
+						<form action="<%=path%>/GoodsServlet">
 							<input type="hidden" name="command" value="search"/>
 							<input type="hidden" name="pagesize" value="15"/>
 							<input type="hidden" name="currentpage" value="1"/>
 							
-							<input id="searchText" type="text" name="search" value="商品关键字"/>
+							<c:if test="${!empty search}">
+								<input id="searchText" type="text" name="search" value="${search}"/>
+							</c:if>
+							<c:if test="${empty search}">
+								<input id="searchText" type="text" name="search" value="商品关键字"/>
+							</c:if>
+							
 							<input id="searchSubmit" type="submit" value="搜&nbsp;&nbsp;索"/>
 						</form>
+							
 					</div>
 				</div>
+
+
 			</div>
 
 		</div>
 
 		<div id="navigation">
 			<div>
-				<div id="goodsListHead" class="left">
-					<span class="left">商品分类</span>
-					<img class="left" src="<%=path%>/activities/img/list1.png" alt="list"/>
-				</div>
 
 				<ul id="navigationList">
+					<li><a href="#">首页</a></li>
 					<li><a href="#">八月新品</a></li>
 					<li><a href="#">助味奥运惠</a></li>
 					<li><a href="#">糖果糕点</a></li>
@@ -175,76 +181,92 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 		</div>
 	</div>
+
 	<div id="body">
-		<div id="banner">
-			<div>
-				<ul id="catList" class="left">
-						
-					<c:forEach items="${categorys}" var="categoryItem">
-						<li><a href="#">${categoryItem.categoryName}</a>
-							<span class="displayNone"><%=path%>/FrontCatogoryServlet?categoryId=${categoryItem.categoryId}</span>
-							<ul>
-							</ul>
-						</li>
-					</c:forEach>
-				</ul>
 
-				<div id="bannerImg">
-					<a href="#"><div id="number1" class="numberBgcolor number" >1</div></a>
-					<a href="#"><div id="number2" class="number">2</div></a>
-					<a href="#"><div id="number3" class="number">3</div></a>
-					<a href="#"><img src="<%=path%>/activities/img/bannerimg1.jpg" alt="bannner"/></a>
-					<a href="#"><img class="hidden" src="<%=path%>/activities/img/bannerimg2.jpg" alt="bannner"/></a>
-					<a href="#"><img class="hidden" src="<%=path%>/activities/img/bannerimg3.jpg" alt="bannner"/></a>
+		<div id="path">
+			<a href="#">首页</a>
+			<span>&gt;</span>
+			<span>商品搜索</span>
+		</div>
+
+		<div id="condition">
+			<ul id="conditionHead">
+				<li class="conditionHeadStyle">商品搜索 </li>
+				<li>共5个商品</li>
+			</ul>
+			<ul id="conditionList">
+				<li><span>品牌：</span><a href="#">周记梁品铺子</a></li>
+				<li><span>包装形式：</span><a href="#">散装</a><a href="#">散装</a></li>
+				<li><span>产源：</span><a href="#">国产</a></li>
+				<li><span>价格：</span><a href="#">9.9元以下</a></li>
+			</ul>
+
+			<ul id="sort">
+				<li>排序：</li>
+				<li><a href="#">综合排序</a></li>
+				<li><a href="#">销量</a></li>
+				<li><a href="#">价格</a></li>
+				<li><a href="#">评分</a></li>
+			</ul>
+		</div>
+
+		<div id="goodsList">
+			<h1></h1>
+			<div class="clear"></div>
+			
+			<c:forEach items="${goodsPage.data}" var="gp">
+				<div class="goodsInfo">
+					<img src="<%=path%>${gp.pictureUrl}" alt="hotsail"/>
+					<h1><a href="#">${gp.goodsName}</a></h1>
+					<div class="clear"></div>
+					<div><p>${gp.description}</p></div>
+					<div><p>￥<span class="inline">${gp.price}</span></p></div>
+					<div class="addCard"><a href="#">加入购物车</a></div>
+					<span class="left blackColor">已售：${gp.sales}</span>
+					<span class="right blackColor">评分：4.5</span>
 				</div>
+			
+			</c:forEach>
+			
 
-				<div id="decount">
-					<a href="#"><img src="<%=path%>/activities/img/decount1.jpg" alt="decount" title="立即秒杀"/></a>
-					<a href="#"><img src="<%=path%>/activities/img/decount2.jpg" alt="decount" title="立即秒杀"/></a>
+			<div id="page">
+				<a href="javascript:;">首页</a>
+				<a href="javascript:;">上一页</a>
+				<span class="greenColor">${goodsPage.currentPage}</span>
+				<span>/</span>
+				<span class="whiteColor">${goodsPage.pageCount}</span>
+				<a href="javascript:;">下一页</a>
+				<input type="text" name="pageIndex"/>
+				<a href="javascript:;">跳转</a>
+				<a href="javascript:;">尾页</a>
+
+			</div>
+			<div id="footer">
+				<div>
+					<ul>
+						<li><a href="#">关于我们</a></li>
+						<li>|</li>
+						<li><a href="#">联系我们</a></li>
+						<li>|</li>
+						<li><a href="#">客户服务</a></li>
+						<li>|</li>
+						<li><a href="#">诚聘英才</a></li>
+						<li>|</li>
+						<li><a href="#">商务合作</a></li>
+						<li>|</li>
+						<li><a href="#">媒体报道</a></li>
+						<li>|</li>
+						<li><a href="#">网站地图</a></li>
+						<li>|</li>
+						<li><a href="#">站长招募</a></li>
+					</ul>
+					<div id="copyRight">Copyright@2016-2116 周记梁品铺子电子商务有限公司 All rights Reserved</div>
+
 				</div>
 			</div>
 		</div>
-
-		<div id="realBody">
-			<c:forEach items="${categoryGoods}" var="catGoods">
-				<div id=""  class="commentDiv">
-					<h1 class="commentH1 left">${catGoods.categoryName}</h1>
-					<h1 class="commentH1 right"><a href="#">more>></a></h1>
-					<div class="clear"></div>
-					
-					<div class="listDiv">
-						<c:forEach items="${catGoods.categoryGoods}" var="cg">
-								<a href="#"><img src="<%=path%>${cg.pictureUrl}" alt="discount"/></a>
-						</c:forEach>
-					</div>
-				
-				</div>
-			</c:forEach>
-
-		</div>
 	</div>
-	<div id="footer">
-		<div>
-			<ul>
-				<li><a href="#">关于我们</a></li>
-				<li>|</li>
-				<li><a href="#">联系我们</a></li>
-				<li>|</li>
-				<li><a href="#">客户服务</a></li>
-				<li>|</li>
-				<li><a href="#">诚聘英才</a></li>
-				<li>|</li>
-				<li><a href="#">商务合作</a></li>
-				<li>|</li>
-				<li><a href="#">媒体报道</a></li>
-				<li>|</li>
-				<li><a href="#">网站地图</a></li>
-				<li>|</li>
-				<li><a href="#">站长招募</a></li>
-			</ul>
-			<div id="copyRight">Copyright@2016-2116 周记梁品铺子电子商务有限公司 All rights Reserved</div>
 
-		</div>
-	</div>
 </body>
 </html>

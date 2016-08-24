@@ -57,7 +57,6 @@ body{
 	width: 20px;
 	height: 20px;
 	margin: 4px;
-	color:white;
 }
 .positionBottom{
 	position: absolute;
@@ -230,7 +229,6 @@ body{
 	background: red;
 	color: white;
 	font-size: 18px;
-	outline: none;
 }
 #hotSearch a:hover{
 	color: #F14648;
@@ -258,7 +256,6 @@ body{
 	float: left;
 	margin: 0 10px;
 	line-height: 35px;
-	color:white;
 	/*width: 40px;*/
 }
 #shoppingCarItem{
@@ -287,6 +284,7 @@ body{
 #goodsItem tr{
 	height: 40px;
 	border-bottom: 1px solid #E0E0E0;
+	background: #0C1021;
 }
 #goodsItem tr a{
 	color: white;
@@ -382,225 +380,140 @@ body{
 	background: red;
 	color: white;
 }
-
-#body{
+#banner{
+	width: 100%;
+	height: 442px;
+	background: #E9ECEC;
+}
+#banner>div{
 	width: 1200px;
+	height: 440px;
+	background: #0C1021;
 	margin: 0 auto;
-	/*float: left;*/
-	/*background: #0C1021;*/
 }
-#path{
-	height: 30px;
-	line-height: 30px;
-	margin: 10px auto;
+#catList{
+	position: relative;
+	width: 177px ;
+	height: 438px;
+	border: 1px solid red;
+	background: #0C1021;
 }
-#path a,span{
-	display: inline-block;
-	color: #0C1021;
-	font-size: 15px;
-	font-weight: bold;
-}
-#path a:hover{
-	color: red;
-}
-
-#condition{
+#catList li{
 	width: 100%;
-	/*height: 100px;*/
-	float: left;
-}
-#conditionHead{
-	width: 100%;
-	/*border: 1px solid red;*/
-	float: left;
-	border-bottom: 2px solid red;
-}
-#conditionHead li{
-	float: left;
 	height: 35px;
-	line-height: 35px;
+	border-bottom: 1px dotted #606369;
+	text-align: center;
+}
+#catList li a{
 	color: white;
-	width: 160px ;
-	text-align: center;
-}
-.conditionHeadStyle{
-	width: 160px ;
-	background: red;
-	font-size: 16px;
-	font-weight: bold;
-	text-align: center;
-	border: 2px solid red;
-	border-top-left-radius: 5px;
-	border-top-right-radius: 5px;
-	border-bottom: 0;
-}
-#conditionList{
-	width: 100%;
-	float: left;
-	/*background: #0C1021;*/
-}
-#conditionList li{
-	width: 100%;
-	height: 50px;
-	line-height: 50px;
-	border-bottom: 2px solid #E0E0E0;
-	color: white;
-}
-#conditionList li span{
-	/*color: #E0E0E0;*/
-	color: #000;
-	font-size: 15px;
-	width: 100px;
-	text-align: right;
-}
-#conditionList li a{
-	/*color: #E0E0E0;*/
-	color: #000;
-	margin: 0 10px;
-}
-#conditionList li a:hover{
-	color: red;
-}
-#sort{
-	width: 100%;
-	height: 50px;
-	/*background: #0C1021;*/
-	float: left;
-	margin: 20px auto;
-}
-#sort li{
-	float: left;
-	height: 50px;
-	line-height: 50px;
-	/*color: #E0E0E0;*/
-	color: #000;
-	font-size: 16px;
-	font-weight: bold;
-	margin: 0 10px;
-}
-#sort li a{
-	/*color: #E0E0E0;*/
-	color: #000;
-	display: inline-block;
-	width: 100%;
-	height: 30px;
-	/*background: red;*/
-	padding: 0 5px;
-	margin: 10px auto;
-	line-height: 30px;
-	text-align: center;
-	border-radius: 5px;
-	border: 1px solid red;
-}
-#sort li a:hover{
-	color: red;
-}
-#goodsList{
-	width: 100%;
-	min-height: 300px;
-	margin: 30px auto;
-	background: white;
-	float: left;
-}
-
-#goodsList img{
-	float: left;
-	margin: 0 auto;
-	width: 270px;
-	height: 300px;
-}
-#goodsList  h1{
-	font-size: 18px;
-	font-weight: bolder;
-	float: left;
-	margin: 0 10px;
-}
-.goodsInfo{
-	margin: 10px auto;
-	width: 270px;
-	padding: 5px;
-	height: 520px;
-	border: 1px solid #F7F7F5;
-	float: left;
-	/*align-content: center;*/
-}
-
-.goodsInfo a:hover{
-	color: red;
-}
-.goodsInfo p{
-	font-size: 13px;
-	color: red;
-	margin: 20px 10px;
-	font-weight: bold;
-}
-.goodsInfo p span{
-	color: red;
-	font-size: 20px;
-}
-.goodsInfo>span{
-	margin: 10px 20px;
-}
-.goodsInfo:hover{
-	border: 1px solid red;
-}
-.addCard{
-	background: red;
-	width: 130px;
-	height: 30px;
-	border: 1px solid red;
-	border-radius: 15px;
-	text-align: center;
-	margin: 0 10px;
-}
-.addCard a{
-	font-size: 16px;
 	display: block;
 	width: 100%;
-	height: 100%;
-	line-height: 30px;
-	color: white;
+	height: 35px;
+	line-height: 35px;
 }
-.addCard:hover{
-	opacity: 0.8;
-}
-.addCard:hover a{
-	color: white;
-}
-#page{
-	clear: both;
-	margin: 30px 25%;
-	float: left;
-}
-#page a{
-	display: inline-block;
-	border-radius: 5px;
+#catList li ul{
+	display: none;
+	position: absolute;
+	left: 177px ;
+	top: -1px;
+	width: 110px ;
+	height: 439px;
+	border: 1px solid red;
+	z-index: 400;
 	background: #0C1021;
-	width: 65px;
-	height: 30px;
-	line-height: 30px;
-	color: white;
-	text-align: center;
+	opacity: 0.9;
 }
-#page a:hover{
-	color: red;
+#catList li:hover{
+	background: #333333;
 }
-#page input{
-	width: 50px;
-	height: 25px;
-	padding: 2px 5px;
-	border: 1px solid #DB6300;
-	outline: none;
-	border-radius: 5px;
+#catList li:hover ul{
+	display: block;
 }
-#page span{
-	display: inline-block;
-	height: 30px;
+
+#bannerImg{
+	position: relative;
+	width: 800px;
+	height: 440px;
+	background: url("../img/bannerimg1.jpg") no-repeat;
+	/*background-position-x: 100px;*/
+	float: left;
+	overflow: hidden;
+}
+#bannerImg a img{
+	position: absolute;
+}
+.number{
+	position: absolute;
+	border-radius: 50px;
+	font-size: 16px;
 	line-height: 30px;
 	width: 30px;
-	background: #FF6400;
-	border-radius: 5px;
+	height: 30px;
+	bottom: 30px;
+	margin-left: 20px;
+	background: #002535;
 	text-align: center;
+	color: white;
+	z-index: 200;
+}
+.numberBgcolor{
+	background: #705743;
+}
+#realBody{
+	width: 1200px;
+	margin: 20px auto;
+	/*background: #002535;*/
+	min-height: 200px;
+}
+#discount{
+
+}
+.commentDiv{
+	width: 100%;
+	height: 265px;
+	position: relative;
+	margin: 50px auto;
+	float: left;
+}
+.commentH1{
+	color: white;
+	position: relative;
+	top: 2px;
+	width: 130px;
+	height: 30px;
+	line-height: 30px;
+	background: #0C1021;
+	text-align: center;
+	font-size: 18px;
+	font-weight: bolder;
+	margin: 0 10px;
+	border: 2px solid red;
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+	border-bottom: 0;
+}
+.commentH1 a{
+	color: white;
+	font-size: 18px;
+	font-weight: bolder;
+}
+.commentH1 a:hover{
+	color: red;
+}
+.listDiv img{
+	float: left;
+	width: 236px;
+	height: 260px;
+	margin-left:3px;
+}
+.listDiv{
+	width: 100%;
+	height: 100%;
+	padding:7px;
+	background: #0C1021;
+	float: left;
+	border: 2px solid red;
+	border-radius: 5px;
 }
 
 #footer{

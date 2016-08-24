@@ -21,11 +21,6 @@
     <servlet-name>FrontCatogoryServlet</servlet-name>
     <servlet-class>com.zjlppz.servlet.FrontCatogoryServlet</servlet-class>
   </servlet>
-  <servlet>
-    <servlet-name>GoodsServlet</servlet-name>
-    <servlet-class>com.zjlppz.servlet.GoodsServlet</servlet-class>
-  </servlet>
-
 
 
 
@@ -45,10 +40,6 @@
   <servlet-mapping>
     <servlet-name>FrontCatogoryServlet</servlet-name>
     <url-pattern>/FrontCatogoryServlet</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>GoodsServlet</servlet-name>
-    <url-pattern>/GoodsServlet</url-pattern>
   </servlet-mapping>
   
   

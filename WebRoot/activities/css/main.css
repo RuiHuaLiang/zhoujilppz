@@ -229,6 +229,7 @@ body{
 	background: red;
 	color: white;
 	font-size: 18px;
+	outline: none;
 }
 #hotSearch a:hover{
 	color: #F14648;
