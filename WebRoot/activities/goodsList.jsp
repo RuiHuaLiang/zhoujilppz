@@ -15,6 +15,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" href="<%=path%>/activities/css/comment.css"/>
 	<script src="<%=path%>/activities/js/jquery-2.1.4.js"></script>
 	<script src="<%=path%>/activities/js/main.js"></script>
+	<script src="<%=path%>/activities/js/pageHandle.js"></script>
 </head>
 <body>
 
@@ -231,11 +232,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			
 
 			<div id="page">
+				<input type="hidden" value="<%=path%>/GoodsServlet?command=pageHandle&pageSize=${goodsPage.pageSize}&search=${search}"/>
+				<span class="displayNone" style="display:none;"><%=path%>/GoodsServlet?command=pageHandle&pageSize=${goodsPage.pageSize}&search=${search}</span>
 				<a href="javascript:;">首页</a>
 				<a href="javascript:;">上一页</a>
-				<span class="greenColor">${goodsPage.currentPage}</span>
+				<span class="greenColor" id="cur">${goodsPage.currentPage}</span>
 				<span>/</span>
-				<span class="whiteColor">${goodsPage.pageCount}</span>
+				<span class="whiteColor" id="pCout">${goodsPage.pageCount}</span>
 				<a href="javascript:;">下一页</a>
 				<input type="text" name="pageIndex"/>
 				<a href="javascript:;">跳转</a>

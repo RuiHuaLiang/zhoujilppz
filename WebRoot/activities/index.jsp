@@ -143,8 +143,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div id="searchInput">
 						<form action="<%=path%>/GoodsServlet" method="post">
 							<input type="hidden" name="command" value="search"/>
-							<input type="hidden" name="pagesize" value="15"/>
-							<input type="hidden" name="currentpage" value="1"/>
+							<input type="hidden" name="pageSize" value="15"/>
+							<input type="hidden" name="currentPage" value="1"/>
 							
 							<input id="searchText" type="text" name="search" value="商品关键字"/>
 							<input id="searchSubmit" type="submit" value="搜&nbsp;&nbsp;索"/>
