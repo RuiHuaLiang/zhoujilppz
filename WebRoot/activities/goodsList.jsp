@@ -18,7 +18,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="<%=path%>/activities/js/pageHandle.js"></script>
 </head>
 <body>
-
+	<input type="hidden" value="<%=path%>" id = "path">
 	<div id="rightToolBar">
 		<ul>
 			<li><a href="#">购物车</a><span class="circleRed">${carItems.size()}</span></li>
@@ -215,32 +215,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div id="goodsList">
 			<h1></h1>
 			<div class="clear"></div>
-			
-			<c:forEach items="${goodsPage.data}" var="gp">
-				<div class="goodsInfo">
-					<img src="<%=path%>${gp.pictureUrl}" alt="hotsail"/>
-					<h1><a href="#">${gp.goodsName}</a></h1>
-					<div class="clear"></div>
-					<div><p>${gp.description}</p></div>
-					<div><p>￥<span class="inline">${gp.price}</span></p></div>
-					<div class="addCard"><a href="#">加入购物车</a></div>
-					<span class="left blackColor">已售：${gp.sales}</span>
-					<span class="right blackColor">评分：4.5</span>
-				</div>
-			
-			</c:forEach>
-			
+			<div id="goodsListContent">
+				<c:forEach items="${goodsPage.data}" var="gp">
+					<div class="goodsInfo">
+						<img src="<%=path%>${gp.pictureUrl}" alt="hotsail"/>
+						<h1><a href="#">${gp.goodsName}</a></h1>
+						<div class="clear"></div>
+						<div><p>${gp.description}</p></div>
+						<div><p>￥<span class="inline">${gp.price}</span></p></div>
+						<div class="addCard"><a href="#">加入购物车</a></div>
+						<span class="left blackColor">已售：${gp.sales}</span>
+						<span class="right blackColor">评分：4.5</span>
+					</div>
+				
+				</c:forEach>
+			</div>
 
 			<div id="page">
 				<input type="hidden" value="<%=path%>/GoodsServlet?command=pageHandle&pageSize=${goodsPage.pageSize}&search=${search}"/>
-				<span class="displayNone" style="display:none;"><%=path%>/GoodsServlet?command=pageHandle&pageSize=${goodsPage.pageSize}&search=${search}</span>
 				<a href="javascript:;">首页</a>
 				<a href="javascript:;">上一页</a>
 				<span class="greenColor" id="cur">${goodsPage.currentPage}</span>
 				<span>/</span>
 				<span class="whiteColor" id="pCout">${goodsPage.pageCount}</span>
 				<a href="javascript:;">下一页</a>
-				<input type="text" name="pageIndex"/>
+				<input type="text" name="pageIndex" id="pageIndex"/>
 				<a href="javascript:;">跳转</a>
 				<a href="javascript:;">尾页</a>
 
