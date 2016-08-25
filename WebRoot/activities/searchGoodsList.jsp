@@ -21,7 +21,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	<div id="rightToolBar">
 		<ul>
-			<li><a href="#">购物车</a><span class="circleRed">${carItems.size()}</span></li>
+			<li><a href="#">购物车</a><span class="circleRed">
+				<c:if test="${!empty carItems}">
+					${carItems.size()}
+				</c:if>
+				<c:if test="${empty carItems}">
+					0
+				</c:if>
+			</span></li>
 			<li><a href="#"><img src="<%=path%>/activities/img/userinfo.png" alt="userinfo"/></a>
 				<div><a href="#">个人中心</a></div>
 			</li>
@@ -95,7 +102,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div id="shoppingCar">
 					<a href="#" class="shoppingLineHeight">购物车</a>
 					<span class="shoppingLineHeight">&gt;</span>
-					<span class="shoppingLineHeight">${carItems.size()}</span>
+					<span class="shoppingLineHeight">
+						<c:if test="${!empty carItems}">
+							${carItems.size()}
+						</c:if>
+						<c:if test="${empty carItems}">
+							0
+						</c:if>
+					</span>
 
 					<div id="shoppingCarItem">
 						<div id="itemHead">
@@ -144,8 +158,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div id="searchInput">
 						<form action="<%=path%>/GoodsServlet">
 							<input type="hidden" name="command" value="search"/>
-							<input type="hidden" name="pagesize" value="15"/>
-							<input type="hidden" name="currentpage" value="1"/>
+							<input type="hidden" name="pageSize" value="16"/>
+							<input type="hidden" name="currentPage" value="1"/>
 							
 							<c:if test="${!empty search}">
 								<input id="searchText" type="text" name="search" value="${search}"/>
@@ -159,8 +173,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							
 					</div>
 				</div>
-
-
 			</div>
 
 		</div>
@@ -169,7 +181,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div>
 
 				<ul id="navigationList">
-					<li><a href="#">首页</a></li>
+					<li><a href="<%=path%>/IndexServlet">首页</a></li>
 					<li><a href="#">八月新品</a></li>
 					<li><a href="#">助味奥运惠</a></li>
 					<li><a href="#">糖果糕点</a></li>
@@ -186,7 +198,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div id="body">
 
 		<div id="path">
-			<a href="#">首页</a>
+			<a href="<%=path%>/IndexServlet">首页</a>
 			<span>&gt;</span>
 			<span>商品搜索</span>
 		</div>
@@ -194,7 +206,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div id="condition">
 			<ul id="conditionHead">
 				<li class="conditionHeadStyle">商品搜索 </li>
-				<li>共5个商品</li>
+				<li style="color:#555555;">共${goodsPage.totalRecord}个商品</li>
 			</ul>
 			<ul id="conditionList">
 				<li><span>品牌：</span><a href="#">周记梁品铺子</a></li>
@@ -233,7 +245,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 			<div id="page">
 				<input type="hidden" value="<%=path%>/GoodsServlet?command=pageHandle&pageSize=${goodsPage.pageSize}&search=${search}"/>
-				<span class="displayNone" style="display:none;"><%=path%>/GoodsServlet?command=pageHandle&pageSize=${goodsPage.pageSize}&search=${search}</span>
 				<a href="javascript:;">首页</a>
 				<a href="javascript:;">上一页</a>
 				<span class="greenColor" id="cur">${goodsPage.currentPage}</span>

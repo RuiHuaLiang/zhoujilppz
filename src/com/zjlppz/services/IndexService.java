@@ -33,9 +33,13 @@ public class IndexService
 	 * @return ÉÌÆ·Êý
 	 * @throws Exception
 	 */
-	public List < Car > getCarItemsCount ( User user ) throws Exception
+	public List < Car > getCarItems ( User user ) throws Exception
 	{
-		return carDao.getUserCars ( user ) ;
+		if(user != null)
+		{
+			return carDao.getUserCars ( user ) ;
+		}
+		return null;
 	}
 
 	/**

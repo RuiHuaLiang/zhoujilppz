@@ -75,7 +75,7 @@ public class GoodsServlet extends HttpServlet
 		try
 		{
 			carItems  = indexService
-					.getCarItemsCount ( ( User ) session.getAttribute ( "user" ) ) ;
+					.getCarItems ( ( User ) session.getAttribute ( "user" ) ) ;
 			request.setAttribute ( "carItems" , carItems ) ;
 		} catch ( Exception e )
 		{
@@ -91,7 +91,7 @@ public class GoodsServlet extends HttpServlet
 		request.setAttribute ( "goodsPage" , goodsPage ) ;
 		System.out.println ( goodsPage ) ;
 		
-		request.getRequestDispatcher ( "/activities/goodsList.jsp" )
+		request.getRequestDispatcher ( "/activities/searchGoodsList.jsp" )
 		.forward ( request , response ) ;
 		
 	}
