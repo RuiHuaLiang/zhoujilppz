@@ -47,16 +47,22 @@ public class IndexServlet extends HttpServlet
 			IOException
 	{
 		HttpSession session = request.getSession ( );
-		User user = new User();
-		user.setUserId ( 1 );
-		user.setUserName ( "xiaoliang" );
+//		User user = new User();
+//		user.setUserId ( 1 );
+//		user.setUserName ( "xiaoliang" );
 		
-		session.setAttribute ( "user" , user);
+//		session.setAttribute ( "user" , user);
 		IndexService indexService = new IndexService ( );
 		List < Car > carItems ;
 		try
 		{
-			carItems = indexService.getCarItemsCount ( user ) ;
+			Object sessionUser = request.getSession ( ).getAttribute ( "user" );
+			User sUser = null;
+			if(sessionUser != null)
+			{
+				sUser = (User)sessionUser;
+			}
+			carItems = indexService.getCarItems ( sUser ) ;
 //			System.out.println (carItems) ;
 			request.setAttribute ( "carItems" , carItems );
 			
