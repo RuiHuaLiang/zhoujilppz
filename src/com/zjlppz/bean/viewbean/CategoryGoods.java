@@ -5,6 +5,7 @@ import java.util.List ;
 
 import com.zjlppz.bean.Category ;
 import com.zjlppz.bean.Goods ;
+import com.zjlppz.util.PageUtil ;
 
 /**
  * 大类别商品实体类
@@ -14,22 +15,22 @@ import com.zjlppz.bean.Goods ;
  */
 public class CategoryGoods extends Category implements Serializable
 {
-	private List < Goods > CategoryGoods ;
+	private PageUtil < Goods > pageCategoryGoods ;
 
-	public List < Goods > getCategoryGoods ( )
+	public PageUtil < Goods > getPageCategoryGoods ( )
 	{
-		return CategoryGoods ;
+		return pageCategoryGoods ;
 	}
 
-	public void setCategoryGoods ( List < Goods > categoryGoods )
+	public void setPageCategoryGoods ( PageUtil < Goods > pageCategoryGoods )
 	{
-		CategoryGoods = categoryGoods ;
+		this.pageCategoryGoods = pageCategoryGoods ;
 	}
 
-	public CategoryGoods ( List < Goods > categoryGoods )
+	public CategoryGoods ( PageUtil < Goods > pageCategoryGoods )
 	{
 		super ( ) ;
-		CategoryGoods = categoryGoods ;
+		this.pageCategoryGoods = pageCategoryGoods ;
 	}
 
 	public CategoryGoods ( )
@@ -41,12 +42,6 @@ public class CategoryGoods extends Category implements Serializable
 			String categoryName )
 	{
 		super ( categoryId , parentId , categoryName ) ;
-	}
-
-	@Override
-	public String toString ( )
-	{
-		return "CategoryGoods [CategoryGoods=" + CategoryGoods + "]" ;
 	}
 
 	

@@ -256,7 +256,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<a href="javascript:;">尾页</a>
 
 			</div>
-			<div id="footer">
+			
+		</div>
+	</div>
+	<div id="footer">
 				<div>
 					<ul>
 						<li><a href="#">关于我们</a></li>
@@ -279,8 +282,5 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 				</div>
 			</div>
-		</div>
-	</div>
-
 </body>
 </html>

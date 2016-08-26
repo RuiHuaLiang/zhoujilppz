@@ -14,24 +14,13 @@ import com.zjlppz.bean.Car ;
 import com.zjlppz.bean.Category ;
 import com.zjlppz.bean.User ;
 import com.zjlppz.bean.viewbean.CategoryGoods ;
+import com.zjlppz.services.GoodsService ;
 import com.zjlppz.services.IndexService ;
 
 public class IndexServlet extends HttpServlet
 {
 
 	
-	public IndexServlet ( )
-	{
-		super ( ) ;
-	}
-
-	
-	public void destroy ( )
-	{
-		super.destroy ( ) ; // Just puts "destroy" string in log
-		// Put your code here
-	}
-
 	
 	public void doGet ( HttpServletRequest request ,
 			HttpServletResponse response ) throws ServletException ,
@@ -47,12 +36,13 @@ public class IndexServlet extends HttpServlet
 			IOException
 	{
 		HttpSession session = request.getSession ( );
-//		User user = new User();
-//		user.setUserId ( 1 );
-//		user.setUserName ( "xiaoliang" );
+		User user = new User();
+		user.setUserId ( 1 );
+		user.setUserName ( "xiaoliang" );
 		
-//		session.setAttribute ( "user" , user);
+		session.setAttribute ( "user" , user);
 		IndexService indexService = new IndexService ( );
+		GoodsService goodsService = new GoodsService();
 		List < Car > carItems ;
 		try
 		{
@@ -69,7 +59,7 @@ public class IndexServlet extends HttpServlet
 			List<Category> categorys = indexService.getCategory ( null );
 			request.setAttribute ( "categorys" , categorys );
 			
-			List<CategoryGoods> categoryGoods = indexService.getCategoryGoods ( null , 1 , 5 );
+			List<CategoryGoods> categoryGoods = goodsService.getCategoryGoods ( null , 1 , 5 );
 			request.setAttribute ( "categoryGoods" , categoryGoods );
 			
 		} catch ( Exception e )
@@ -83,14 +73,5 @@ public class IndexServlet extends HttpServlet
 
 	}
 
-	/**
-	 * Initialization of the servlet. <br>
-	 *
-	 * @throws ServletException if an error occurs
-	 */
-	public void init ( ) throws ServletException
-	{
-		// Put your code here
-	}
-
+	
 }

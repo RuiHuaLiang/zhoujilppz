@@ -18,6 +18,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="<%=path%>/activities/js/categoryManage.js"></script>
 </head>
 <body>
+	<input type="hidden" value="<%=path%>" id = "path">
 	<div id="rightToolBar">
 		<ul>
 			<li><a href="#">购物车</a><span class="circleRed">
@@ -127,7 +128,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<c:forEach items="${carItems}" var="item">
 								<tr>
 									<th><a href="#"><img src="<%=path%>${item.pictureUrl}" alt="decount"/></a></th>
-									<th><a href="#">${item.goodsName})</a></th>
+									<th><a href="#">${item.goodsName}</a></th>
 									<th><span class="redColor inline">${item.goodsNum}</span></th>
 									<th><span class="redColor inline">￥${item.goodsPrice}</span></th>
 								</tr>	
@@ -195,8 +196,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<ul id="catList" class="left">
 						
 					<c:forEach items="${categorys}" var="categoryItem">
-						<li><a href="#">${categoryItem.categoryName}</a>
-							<span class="displayNone"><%=path%>/FrontCatogoryServlet?categoryId=${categoryItem.categoryId}</span>
+						<li><a href="<%=path%>/GoodsServlet?command=catGoods&categoryId=${categoryItem.categoryId}&categoryName=${categoryItem.categoryName}&currentPage=1&pageSize=16">${categoryItem.categoryName}</a>
+							<span class="displayNone"><%=path%>/GoodsServlet?categoryId=${categoryItem.categoryId}</span>
 							<ul>
 							</ul>
 						</li>
@@ -221,14 +222,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 		<div id="realBody">
 			<c:forEach items="${categoryGoods}" var="catGoods">
-				<div id=""  class="commentDiv">
+				<div class="commentDiv">
 					<h1 class="commentH1 left">${catGoods.categoryName}</h1>
-					<h1 class="commentH1 right"><a href="#">more>></a></h1>
+					<h1 class="commentH1 right"><a href="<%=path%>/GoodsServlet?command=catGoods&categoryId=${catGoods.categoryId}&categoryName=${catGoods.categoryName}&currentPage=1&pageSize=16">more>></a></h1>
 					<div class="clear"></div>
 					
 					<div class="listDiv">
-						<c:forEach items="${catGoods.categoryGoods}" var="cg">
-								<a href="#"><img src="<%=path%>${cg.pictureUrl}" alt="discount"/></a>
+						<c:forEach items="${catGoods.pageCategoryGoods.data}" var="cg">
+								<a href="<%=path%>/GoodsServlet?command=goodsInfo&goodsId=${cg.goodsId}"><img src="<%=path%>${cg.pictureUrl}" alt="discount"/></a>
 						</c:forEach>
 					</div>
 				

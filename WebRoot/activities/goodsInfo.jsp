@@ -9,15 +9,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>分类商品页</title>
+	<title>商品详情页</title>
 	<link rel="stylesheet" href="<%=path%>/activities/css/reset.css"/>
-	<link rel="stylesheet" href="<%=path%>/activities/css/search.css"/>
+	<link rel="stylesheet" href="<%=path%>/activities/css/goodsInfo.css"/>
 	<link rel="stylesheet" href="<%=path%>/activities/css/comment.css"/>
 	<script src="<%=path%>/activities/js/jquery-2.1.4.js"></script>
 	<script src="<%=path%>/activities/js/main.js"></script>
-	<script src="<%=path%>/activities/js/pageHandle.js"></script>
+	<script src="<%=path%>/activities/js/goodsInfo.js"></script>
 </head>
 <body>
+
 	<input type="hidden" value="<%=path%>" id = "path">
 	<div id="rightToolBar">
 		<ul>
@@ -128,7 +129,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<c:forEach items="${carItems}" var="item">
 								<tr>
 									<th><a href="#"><img src="<%=path%>${item.pictureUrl}" alt="decount"/></a></th>
-									<th><a href="#">${item.goodsName})</a></th>
+									<th><a href="#">${item.goodsName}</a></th>
 									<th><span class="redColor inline">${item.goodsNum}</span></th>
 									<th><span class="redColor inline">￥${item.goodsPrice}</span></th>
 								</tr>	
@@ -195,92 +196,131 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 	</div>
 
+
 	<div id="body">
 
 		<div id="path">
 			<a href="<%=path%>/IndexServlet">首页</a>
 			<span>&gt;</span>
-			<span>${categoryName}</span>
+			<span>${goodsInfo.categoryname}</span>
+			<span>&gt;</span>
+			<span>${goodsInfo.goodsName}</span>
 		</div>
 
-		<div id="condition">
-			<ul id="conditionHead">
-				<li class="conditionHeadStyle">商品类别   ${categoryName} </li>
-				<li style="color:#555555;">共${pageCategoryGoods.totalRecord}个商品</li>
-			</ul>
-			<ul id="conditionList">
-				<li><span>品牌：</span><a href="#">周记梁品铺子</a></li>
-				<li><span>包装形式：</span><a href="#">散装</a><a href="#">散装</a></li>
-				<li><span>产源：</span><a href="#">国产</a></li>
-				<li><span>价格：</span><a href="#">9.9元以下</a></li>
-			</ul>
+		<div id="goodsGeneral">
+			<div id="goodsImg">
+				<div id="bigImg">
+					<img src="<%=path%>${goodsInfo.pictureUrl}" alt="goodsInfo"/>
+				</div>
+				<div id="smallImg">
+					<ul>
+						<li><img src="<%=path%>${goodsInfo.pictureUrl}" alt="<%=path%>${goodsInfo.pictureUrl}"/></li>
+					</ul>
+				</div>
+			</div>
+			<div id="goodsParameter">
+				<h1 class="blackColor goodsHead">${goodsInfo.goodsName}</h1>
+				<h1 class="redColor">${goodsInfo.description}</h1>
+				<h1 >价格：<span class="redColor">￥</span><span class="redColor bigFont" >${goodsInfo.price}</span></h1>
+				<h1 >销量：<span class="redColor">${goodsInfo.sales}</span></h1>
+				<h1 >商品评分：<span class="redColor">4.5</span></h1>
 
-			<ul id="sort">
-				<li>排序：</li>
-				<li><a href="#">综合排序</a></li>
-				<li><a href="#">销量</a></li>
-				<li><a href="#">价格</a></li>
-				<li><a href="#">评分</a></li>
-			</ul>
-		</div>
-
-		<div id="goodsList">
-			<h1></h1>
-			<div class="clear"></div>
-			<div id="goodsListContent">
-				<c:forEach items="${pageCategoryGoods.data}" var="gp">
-					<div class="goodsInfo">
-						<img src="<%=path%>${gp.pictureUrl}" alt="hotsail"/>
-						<h1><a href="#">${gp.goodsName}</a></h1>
-						<div class="clear"></div>
-						<div><p>${gp.description}</p></div>
-						<div><p>￥<span class="inline">${gp.price}</span></p></div>
-						<div class="addCard"><a href="#">加入购物车</a></div>
-						<span class="left blackColor">已售：${gp.sales}</span>
-						<span class="right blackColor">评分：4.5</span>
+				<div id="order">
+					<p class="left">数量：</p>
+					<span><a href="javascript:;" id="sub">-</a></span>
+					<input type="text" value="1" id="number"/>
+					<span><a href="javascript:;" id="add">+</a></span>
+					<p class="left">&nbsp;件</p>
+				</div>
+				<div class="clear">
+					<div id="addToCar" class="buy">
+						<a href="#" >加入购物车>></a>
 					</div>
-				
-				</c:forEach>
-			</div>
-
-			<div id="page">
-				<input type="hidden" value="<%=path%>/GoodsServlet?command=categoryGoodsPageHandle&pageSize=${pageCategoryGoods.pageSize}&parentId=${parentId}"/>
-				<a href="javascript:;">首页</a>
-				<a href="javascript:;">上一页</a>
-				<span class="greenColor" id="cur">${pageCategoryGoods.currentPage}</span>
-				<span>/</span>
-				<span class="whiteColor" id="pCout">${pageCategoryGoods.pageCount}</span>
-				<a href="javascript:;">下一页</a>
-				<input type="text" name="pageIndex" id="pageIndex"/>
-				<a href="javascript:;">跳转</a>
-				<a href="javascript:;">尾页</a>
+					<div id="addToCollect" class="  buy">
+						<a href="#">加关注>></a>
+					</div>
+				</div>
 
 			</div>
-			
+		</div>
+
+		<div id="goodsInfo">
+			<div id="detail">
+				<ul id="detailHeader">
+					<li><a href="Javascript:;" class="bgRed">商品介绍</a></li>
+					<li><a href="Javascript:;">你问我答</a></li>
+					<li><a href="Javascript:;">购买须知</a></li>
+					<li><a href="Javascript:;">售后服务</a></li>
+				</ul>
+
+				<div id="introduce" class="commentStyle">
+					<ul id="paraList">
+						<li>保质期（天）:150</li>
+						<li>是否为有机食品:否</li>
+						<li>产品标准号:GB/T 20981</li>
+						<li>商品来源地:国产</li>
+						<li>储存方式:常温</li>
+						<li>商品包装方式:大袋装</li>
+						<li>食品生产许可证号QS:QS3505 2401 0662</li>
+						<li>制作工艺:糕点类</li>
+						<li>生产产地:福建省泉州市</li>
+					</ul>
+					<h1 class="weighth1">商品介绍</h1>
+					<div class="clear"></div>
+					<img src="<%=path %>/activities/img/introduce1.jpg" alt="introduce"/>
+					<img src="<%=path %>/activities/img/introduce2.jpg" alt="introduce"/>
+					<img src="<%=path %>/activities/img/introduce3.jpg" alt="introduce"/>
+				</div>
+
+				<div id="tips" class="commentStyle">
+
+				</div>
+				<div id="service" class="commentStyle">
+
+				</div>
+				<div id="question" class="commentStyle">
+					<p>
+						提示：因厂家更改产品包装、产地或者更换随机附件等没有任何提前通知，
+					且每位咨询者购买情况、提问时间等不同， 为此以下回复信息仅供参考！
+					若由此给您带来不便请多多谅解，谢谢！
+					</p>
+					<div><a href="#">我要咨询</a></div>
+				</div>
+			</div>
+			<div id="recommend">
+				<div id="head">
+					<h1>为您推荐</h1>
+				</div>
+				<div class="reGoods">
+					<img src="<%=path %>/activities/img/rec1.jpg" alt="rec"/>
+					<h1><a href="#">什锦葡萄干（400g）（电商专供新包</a></h1>
+					<h1 class="redColor">价格 ￥19.9</h1>
+				</div>
+			</div>
 		</div>
 	</div>
 	<div id="footer">
-				<div>
-					<ul>
-						<li><a href="#">关于我们</a></li>
-						<li>|</li>
-						<li><a href="#">联系我们</a></li>
-						<li>|</li>
-						<li><a href="#">客户服务</a></li>
-						<li>|</li>
-						<li><a href="#">诚聘英才</a></li>
-						<li>|</li>
-						<li><a href="#">商务合作</a></li>
-						<li>|</li>
-						<li><a href="#">媒体报道</a></li>
-						<li>|</li>
-						<li><a href="#">网站地图</a></li>
-						<li>|</li>
-						<li><a href="#">站长招募</a></li>
-					</ul>
-					<div id="copyRight">Copyright@2016-2116 周记梁品铺子电子商务有限公司 All rights Reserved</div>
+		<div>
+			<ul>
+				<li><a href="#">关于我们</a></li>
+				<li>|</li>
+				<li><a href="#">联系我们</a></li>
+				<li>|</li>
+				<li><a href="#">客户服务</a></li>
+				<li>|</li>
+				<li><a href="#">诚聘英才</a></li>
+				<li>|</li>
+				<li><a href="#">商务合作</a></li>
+				<li>|</li>
+				<li><a href="#">媒体报道</a></li>
+				<li>|</li>
+				<li><a href="#">网站地图</a></li>
+				<li>|</li>
+				<li><a href="#">站长招募</a></li>
+			</ul>
+			<div id="copyRight">Copyright@2016-2116 周记梁品铺子电子商务有限公司 All rights Reserved</div>
 
-				</div>
-			</div>
+		</div>
+	</div>
 </body>
 </html>
