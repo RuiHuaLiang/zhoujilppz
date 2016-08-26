@@ -88,7 +88,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<li >|</li>
 					<li class="redAndUnderline"><a href="#">关注良品</a></li>
 					<li >|</li>
-					<li class="redAndUnderline"><a href="#">官方网站</a></li>
+					<li class="redAndUnderline"><a href="<%=path%>/IndexServlet">官方网站</a></li>
 				</ul>
 			</div>
 		</div>
@@ -96,7 +96,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div id="logoAndSearch">
 			<div>
 				<div id="logo" class="left">
-					<img src="<%=path%>/activities/img/logo.png" alt="logo"/>
+					<a href="<%=path%>/IndexServlet"><img src="<%=path%>/activities/img/logo.png" alt="logo"/></a>
 				</div>
 
 				<div id="shoppingCar">
@@ -127,8 +127,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<c:set var="itemCount" value="0"></c:set>
 							<c:forEach items="${carItems}" var="item">
 								<tr>
-									<th><a href="#"><img src="<%=path%>${item.pictureUrl}" alt="decount"/></a></th>
-									<th><a href="#">${item.goodsName})</a></th>
+									<th><a href="<%=path%>/GoodsServlet?command=goodsInfo&goodsId=${item.goodsId}"><img src="<%=path%>${item.pictureUrl}" alt="decount"/></a></th>
+									<th><a href="<%=path%>/GoodsServlet?command=goodsInfo&goodsId=${item.goodsId}">${item.goodsName})</a></th>
 									<th><span class="redColor inline">${item.goodsNum}</span></th>
 									<th><span class="redColor inline">￥${item.goodsPrice}</span></th>
 								</tr>	
@@ -230,8 +230,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div id="goodsListContent">
 				<c:forEach items="${goodsPage.data}" var="gp">
 					<div class="goodsInfo">
-						<img src="<%=path%>${gp.pictureUrl}" alt="hotsail"/>
-						<h1><a href="#">${gp.goodsName}</a></h1>
+						<a href="<%=path%>/GoodsServlet?command=goodsInfo&goodsId=${gp.goodsId}"><img src="<%=path%>${gp.pictureUrl}" alt="hotsail"/></a>
+						<h1><a href="<%=path%>/GoodsServlet?command=goodsInfo&goodsId=${gp.goodsId}">${gp.goodsName}</a></h1>
 						<div class="clear"></div>
 						<div><p>${gp.description}</p></div>
 						<div><p>￥<span class="inline">${gp.price}</span></p></div>

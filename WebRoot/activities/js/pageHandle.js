@@ -77,8 +77,8 @@ function iteration(data){
 	$.each(data.data , function(index , item){
 		var gHtml = $("#goodsListContent").html();
 		var contentItem = "<div class='goodsInfo'>" +
-			"<img src='"+path+item.pictureUrl+"' alt='hotsail'/>" +
-			"<h1><a href='#'>"+item.goodsName+"</a></h1>" +
+			"<a href='"+path+"/GoodsServlet?command=goodsInfo&goodsId="+item.goodsId+"'><img src='"+path+item.pictureUrl+"' alt='hotsail'/></a>" +
+			"<h1><a href='"+path+"/GoodsServlet?command=goodsInfo&goodsId="+item.goodsId+"'>"+item.goodsName+"</a></h1>" +
 			"<div class='clear'></div>" +
 			"<div><p>"+item.description+"</p></div>" +
 			"<div><p>￥<span class='inline'>"+item.price+"</span></p></div>" +
