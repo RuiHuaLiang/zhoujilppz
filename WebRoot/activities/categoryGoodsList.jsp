@@ -150,10 +150,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div id="search" class="right">
 					<div id="hotSearch">
 						<span class="blackColor left">热门搜索：</span>
-						<a href="#">松子</a>
-						<a href="#">松子</a>
-						<a href="#">松子</a>
-						<a href="#">松子</a>
+						<a href="<%=path%>/GoodsServlet?command=search&pageSize=16&currentPage=1&search=松子">松子</a>
+						<a href="<%=path%>/GoodsServlet?command=search&pageSize=16&currentPage=1&search=瓜子">瓜子</a>
+						<a href="<%=path%>/GoodsServlet?command=search&pageSize=16&currentPage=1&search=坚果">坚果</a>
+						<a href="<%=path%>/GoodsServlet?command=search&pageSize=16&currentPage=1&search=豆干">豆干</a>
 					</div>
 					<div id="searchInput">
 						<form action="<%=path%>/GoodsServlet">
@@ -217,10 +217,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 			<ul id="sort">
 				<li>排序：</li>
-				<li><a href="#">综合排序</a></li>
+				<li><a href="#">默认</a></li>
 				<li><a href="#">销量</a></li>
 				<li><a href="#">价格</a></li>
-				<li><a href="#">评分</a></li>
 			</ul>
 		</div>
 

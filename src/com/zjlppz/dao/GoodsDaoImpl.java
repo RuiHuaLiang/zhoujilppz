@@ -240,9 +240,10 @@ public class GoodsDaoImpl
 	 * 
 	 */
 	public PageUtil < Goods > getGoodsByParentIdByPage ( Integer parentId ,
-			int currentPage , int pageSize ) throws Exception
+			int currentPage , int pageSize , int orderflag) throws Exception
 	{
-		String sql = "select * from goods where categoryid in(select categoryid from categories where parentid = ?) order by goodsid desc" ;
+		String sql = "select * from goods where categoryid in(select categoryid from categories where parentid = ?)  " ;
+		sql = concatSqlString ( sql , orderflag );
 		return JDBCUtilTemplate.queryDataByPage ( sql ,
 				new Object [ ] { parentId } , currentPage , pageSize ,
 				Goods.class ) ;
@@ -261,9 +262,11 @@ public class GoodsDaoImpl
 	 * @throws Exception
 	 */
 	public PageUtil < Goods > getGoodsByCategoryIdByPage ( Integer categoryId ,
-			int currentPage , int pageSize ) throws Exception
+			int currentPage , int pageSize , int orderflag ) throws Exception
 	{
-		String sql = "select * from goods where categoryid = ? order by goodsid desc" ;
+		String sql = "select * from goods where categoryid = ?  " ;
+		sql = concatSqlString ( sql , orderflag );
+
 		return JDBCUtilTemplate.queryDataByPage ( sql ,
 				new Object [ ] { categoryId } , currentPage , pageSize ,
 				Goods.class ) ;
@@ -281,6 +284,39 @@ public class GoodsDaoImpl
 	{
 		String sql = "select goods.*,parentid, categoryname from goods,categories where goods.goodsid = ? and categories.categoryid = goods.categoryid" ;
 		return JDBCUtilTemplate.queryData ( sql , Goods.class , goodsId ) ;
+	}
+
+	/**
+	 * 根据条件拼接sql语句，以使用不同的字段进行排序
+	 * 
+	 * @param sql
+	 *            sql 语句
+	 * @param orderflag
+	 *            排序标志
+	 * @return
+	 */
+	public String concatSqlString ( String sql , int orderflag )
+	{
+		switch ( orderflag )
+		{
+		case ORDER_DEFAULT :
+			break ;
+		case ORDER_PRICE_ASC :
+			sql = sql + "order by price asc" ;
+			break ;
+		case ORDER_PRICE_DESC :
+			sql = sql + "order by price desc" ;
+			break ;
+		case ORDER_SALES_ASC :
+			sql = sql + "order by sales asc" ;
+			break ;
+		case ORDER_SALES_DESC :
+			sql = sql + "order by sales desc" ;
+			break ;
+		default :
+			break ;
+		}
+		return sql ;
 	}
 
 }

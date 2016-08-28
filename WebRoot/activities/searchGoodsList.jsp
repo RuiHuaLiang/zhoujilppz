@@ -16,6 +16,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="<%=path%>/activities/js/jquery-2.1.4.js"></script>
 	<script src="<%=path%>/activities/js/main.js"></script>
 	<script src="<%=path%>/activities/js/pageHandle.js"></script>
+	<script src="<%=path%>/activities/js/sortHandle.js"></script>
 </head>
 <body>
 	<input type="hidden" value="<%=path%>" id = "path">
@@ -150,10 +151,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div id="search" class="right">
 					<div id="hotSearch">
 						<span class="blackColor left">热门搜索：</span>
-						<a href="#">松子</a>
-						<a href="#">松子</a>
-						<a href="#">松子</a>
-						<a href="#">松子</a>
+						<a href="<%=path%>/GoodsServlet?command=search&pageSize=16&currentPage=1&search=松子">松子</a>
+						<a href="<%=path%>/GoodsServlet?command=search&pageSize=16&currentPage=1&search=瓜子">瓜子</a>
+						<a href="<%=path%>/GoodsServlet?command=search&pageSize=16&currentPage=1&search=坚果">坚果</a>
+						<a href="<%=path%>/GoodsServlet?command=search&pageSize=16&currentPage=1&search=豆干">豆干</a>
 					</div>
 					<div id="searchInput">
 						<form action="<%=path%>/GoodsServlet">
@@ -217,10 +218,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 			<ul id="sort">
 				<li>排序：</li>
-				<li><a href="#">综合排序</a></li>
-				<li><a href="#">销量</a></li>
-				<li><a href="#">价格</a></li>
-				<li><a href="#">评分</a></li>
+				<li><a href="javascript:;" style="color:red;">默认</a></li>
+				<input type="hidden" id="default"  value="true"/>
+				
+				<li><a href="javascript:;">销量</a></li>
+				<input type="hidden" id="sales"  value="false"/>
+				
+				<li><a href="javascript:;">价格</a></li>
+				<input type="hidden" id="price" value="false"/>
 			</ul>
 		</div>
 

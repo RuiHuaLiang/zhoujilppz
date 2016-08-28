@@ -150,16 +150,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div id="search" class="right">
 					<div id="hotSearch">
 						<span class="blackColor left">热门搜索：</span>
-						<a href="#">松子</a>
-						<a href="#">松子</a>
-						<a href="#">松子</a>
-						<a href="#">松子</a>
+						<a href="<%=path%>/GoodsServlet?command=search&pageSize=16&currentPage=1&search=松子">松子</a>
+						<a href="<%=path%>/GoodsServlet?command=search&pageSize=16&currentPage=1&search=瓜子">瓜子</a>
+						<a href="<%=path%>/GoodsServlet?command=search&pageSize=16&currentPage=1&search=坚果">坚果</a>
+						<a href="<%=path%>/GoodsServlet?command=search&pageSize=16&currentPage=1&search=豆干">豆干</a>
 					</div>
 					<div id="searchInput">
 						<form action="<%=path%>/GoodsServlet" method="post">
 							<input type="hidden" name="command" value="search"/>
 							<input type="hidden" name="pageSize" value="16"/>
 							<input type="hidden" name="currentPage" value="1"/>
+							<input type="hidden" name="sort" value="default"/>
 							
 							<input id="searchText" type="text" name="search" value="商品关键字"/>
 							<input id="searchSubmit" type="submit" value="搜&nbsp;&nbsp;索"/>
@@ -196,7 +197,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<ul id="catList" class="left">
 						
 					<c:forEach items="${categorys}" var="categoryItem">
-						<li><a href="<%=path%>/GoodsServlet?command=catGoods&categoryId=${categoryItem.categoryId}&categoryName=${categoryItem.categoryName}&currentPage=1&pageSize=16">${categoryItem.categoryName}</a>
+						<li><a href="<%=path%>/GoodsServlet?command=catGoods&categoryId=${categoryItem.categoryId}&categoryName=${categoryItem.categoryName}&currentPage=1&pageSize=16&sort=default">${categoryItem.categoryName}</a>
 							<span class="displayNone"><%=path%>/GoodsServlet?categoryId=${categoryItem.categoryId}</span>
 							<ul>
 							</ul>
@@ -224,7 +225,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<c:forEach items="${categoryGoods}" var="catGoods">
 				<div class="commentDiv">
 					<h1 class="commentH1 left">${catGoods.categoryName}</h1>
-					<h1 class="commentH1 right"><a href="<%=path%>/GoodsServlet?command=catGoods&categoryId=${catGoods.categoryId}&categoryName=${catGoods.categoryName}&currentPage=1&pageSize=16">more>></a></h1>
+					<h1 class="commentH1 right"><a href="<%=path%>/GoodsServlet?command=catGoods&categoryId=${catGoods.categoryId}&categoryName=${catGoods.categoryName}&currentPage=1&pageSize=16&sort=default">more>></a></h1>
 					<div class="clear"></div>
 					
 					<div class="listDiv">

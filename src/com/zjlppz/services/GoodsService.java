@@ -30,17 +30,17 @@ public class GoodsService
 	 *            商品Id
 	 * @return
 	 */
-	public  Goods  getGoodsInfoById ( Integer goodsId )
+	public Goods getGoodsInfoById ( Integer goodsId )
 	{
 		try
 		{
-			List<Goods> goodses =  goodsDao.getGoodsInfoById ( goodsId ) ;
-			Goods goodsInfo = new Goods();
-			for(Goods goods : goodses)
+			List < Goods > goodses = goodsDao.getGoodsInfoById ( goodsId ) ;
+			Goods goodsInfo = new Goods ( ) ;
+			for ( Goods goods : goodses )
 			{
-				goodsInfo = goods;
+				goodsInfo = goods ;
 			}
-			return goodsInfo;
+			return goodsInfo ;
 		} catch ( Exception e )
 		{
 			e.printStackTrace ( ) ;
@@ -60,12 +60,12 @@ public class GoodsService
 	 * @return
 	 */
 	public PageUtil < Goods > getGoodsByCategoryIdByPage ( Integer categoryId ,
-			int currentPage , int pageSize )
+			int currentPage , int pageSize , String sort )
 	{
 		try
 		{
 			return goodsDao.getGoodsByCategoryIdByPage ( categoryId ,
-					currentPage , pageSize ) ;
+					currentPage , pageSize , dealWithSort(sort ) ) ;
 		} catch ( Exception e )
 		{
 			e.printStackTrace ( ) ;
@@ -85,7 +85,7 @@ public class GoodsService
 	 * @return
 	 */
 	public List < CategoryGoods > getCategoryGoods ( Integer parentId ,
-			int currentPage , int pageSize )
+			int currentPage , int pageSize , String sort )
 	{
 		List < CategoryGoods > categoryGoodses = new ArrayList < CategoryGoods > ( ) ;
 		try
@@ -102,7 +102,8 @@ public class GoodsService
 				categoryGoods.setParentId ( category.getParentId ( ) ) ;
 
 				PageUtil < Goods > pageCategoryGoods = getPageCategoryGoods (
-						category.getCategoryId ( ) , currentPage , pageSize ) ;
+						category.getCategoryId ( ) , currentPage , pageSize ,
+						sort ) ;
 				categoryGoods.setPageCategoryGoods ( pageCategoryGoods ) ;
 
 				categoryGoodses.add ( categoryGoods ) ;
@@ -130,12 +131,12 @@ public class GoodsService
 	 * @throws Exception
 	 */
 	public PageUtil < Goods > getPageCategoryGoods ( Integer categoryId ,
-			int currentPage , int pageSize )
+			int currentPage , int pageSize , String sort )
 	{
 		try
 		{
 			return goodsDao.getGoodsByParentIdByPage ( categoryId ,
-					currentPage , pageSize ) ;
+					currentPage , pageSize , dealWithSort(sort )) ;
 		} catch ( Exception e )
 		{
 			e.printStackTrace ( ) ;
@@ -158,10 +159,36 @@ public class GoodsService
 	 * @throws Exception
 	 */
 	public PageUtil < Goods > getGoodsByPage ( int pagesize , int currentpage ,
-			String condt , int orderflag ) throws Exception
+			String condt , String sort ) throws Exception
 	{
+		// 判断使用何种排序
+		int orderflag = dealWithSort ( sort ) ;
+
 		return goodsDao.getGoodsByPage ( pagesize , currentpage , condt ,
 				orderflag ) ;
+	}
+
+	/**
+	 * 排序处理
+	 * 
+	 * @param sort
+	 *            排序方式
+	 * @return 返回相应排序方式的数值表示
+	 */
+	public int dealWithSort ( String sort )
+	{
+		if ( "default".equals ( sort ) )
+		{
+			return GoodsDaoImpl.ORDER_DEFAULT ;
+		} else if ( "sales".equals ( sort ) )
+		{
+			return GoodsDaoImpl.ORDER_SALES_ASC ;
+		} else if ( "price".equals ( sort ) )
+		{
+			return GoodsDaoImpl.ORDER_PRICE_ASC ;
+		}
+
+		return GoodsDaoImpl.ORDER_DEFAULT ;
 	}
 
 }

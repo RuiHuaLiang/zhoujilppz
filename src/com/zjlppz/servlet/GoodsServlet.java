@@ -122,6 +122,7 @@ public class GoodsServlet extends HttpServlet
 		Integer parentId = Integer.parseInt ( request.getParameter ( "parentId" ) );
 		int currentPage = Integer.parseInt ( request.getParameter ( "currentPage" ));
 		int pageSize = Integer.parseInt ( request.getParameter ( "pageSize" ));
+		String sort = request.getParameter ( "sort" ) ;
 		
 		GoodsService goodsService = new GoodsService();
 		
@@ -130,11 +131,11 @@ public class GoodsServlet extends HttpServlet
 			PageUtil < Goods > pageCategoryGoods;
 			if(parentId < 10 )
 			{
-				pageCategoryGoods = goodsService.getPageCategoryGoods ( parentId , currentPage , pageSize );
+				pageCategoryGoods = goodsService.getPageCategoryGoods ( parentId , currentPage , pageSize , sort);
 			}
 			else
 			{
-				pageCategoryGoods = goodsService.getGoodsByCategoryIdByPage ( parentId , currentPage , pageSize );
+				pageCategoryGoods = goodsService.getGoodsByCategoryIdByPage ( parentId , currentPage , pageSize , sort);
 			}
 			
 			Gson gson = new Gson();
@@ -167,9 +168,11 @@ public class GoodsServlet extends HttpServlet
 		
 		int currentPage = Integer.parseInt ( request.getParameter ( "currentPage" ));
 		int pageSize = Integer.parseInt ( request.getParameter ( "pageSize" ));
+		String sort = request.getParameter ( "sort" ) ;
 		
 		String categoryName = request.getParameter ( "categoryName" );
 		request.setAttribute ( "categoryName" , categoryName );
+		
 		
 		//»ñÈ¡µÇÂ¼Session
 		HttpSession session = request.getSession ( ) ;
@@ -188,11 +191,11 @@ public class GoodsServlet extends HttpServlet
 			PageUtil < Goods > pageCategoryGoods;
 			if(parentId < 10 )
 			{
-				pageCategoryGoods = goodsService.getPageCategoryGoods ( parentId , currentPage , pageSize );
+				pageCategoryGoods = goodsService.getPageCategoryGoods ( parentId , currentPage , pageSize , sort);
 			}
 			else
 			{
-				pageCategoryGoods = goodsService.getGoodsByCategoryIdByPage ( parentId , currentPage , pageSize );
+				pageCategoryGoods = goodsService.getGoodsByCategoryIdByPage ( parentId , currentPage , pageSize , sort);
 			}
 			
 			request.setAttribute ( "pageCategoryGoods" , pageCategoryGoods );
@@ -256,7 +259,8 @@ public class GoodsServlet extends HttpServlet
 			IOException
 	{
 		String search = request.getParameter ( "search" ) ;
-		PageUtil < Goods > goodsPage = getSearchPageGoods(request , response , search);
+		String sort = request.getParameter ( "sort" ) ;
+		PageUtil < Goods > goodsPage = getSearchPageGoods(request , response , search , sort);
 		
 		Gson gson = new Gson();
 		String goodsPageJsonString = gson.toJson ( goodsPage );
@@ -285,23 +289,26 @@ public class GoodsServlet extends HttpServlet
 			carItems  = indexService
 					.getCarItems ( ( User ) session.getAttribute ( "user" ) ) ;
 			request.setAttribute ( "carItems" , carItems ) ;
+		
+		
+		
+			String search = request.getParameter ( "search" ) ;
+			// System.out.println (search) ;
+			request.setAttribute ( "search" , search ) ;
+			
+			String sort = request.getParameter ( "sort" );
+			
+			PageUtil < Goods > goodsPage = getSearchPageGoods(request , response , search , sort);
+			request.setAttribute ( "goodsPage" , goodsPage ) ;
+			
+			System.out.println ( goodsPage ) ;
+			
+			request.getRequestDispatcher ( "/activities/searchGoodsList.jsp" )
+			.forward ( request , response ) ;
 		} catch ( Exception e )
 		{
 			e.printStackTrace();
 		}
-		
-		
-		String search = request.getParameter ( "search" ) ;
-		// System.out.println (search) ;
-		request.setAttribute ( "search" , search ) ;
-		
-		PageUtil < Goods > goodsPage = getSearchPageGoods(request , response , search);
-		request.setAttribute ( "goodsPage" , goodsPage ) ;
-		System.out.println ( goodsPage ) ;
-		
-		request.getRequestDispatcher ( "/activities/searchGoodsList.jsp" )
-		.forward ( request , response ) ;
-		
 	}
 
 	/**
@@ -314,7 +321,7 @@ public class GoodsServlet extends HttpServlet
 	 * @throws IOException
 	 */
 	public PageUtil < Goods > getSearchPageGoods ( HttpServletRequest request ,
-			HttpServletResponse response , String search) throws ServletException ,
+			HttpServletResponse response , String search , String sort) throws ServletException ,
 			IOException
 	{
 		GoodsService goodsService = new GoodsService();
@@ -324,8 +331,7 @@ public class GoodsServlet extends HttpServlet
 		try
 		{
 			PageUtil < Goods > goodsPage = goodsService.getGoodsByPage (
-					pageSize , currentPage , search ,
-					GoodsDaoImpl.ORDER_DEFAULT ) ;
+					pageSize , currentPage , search , sort) ;
 			return goodsPage;
 
 		} catch ( Exception e )

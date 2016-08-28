@@ -4,8 +4,8 @@
 
 $(function(){
 	path = $("#path").val().trim();
-	var url = $("#page input:eq(0)").val().trim();
-	
+	var sort = $("#sort input[value='true']").attr("id").trim();
+	var url = $("#page input:eq(0)").val().trim()+"sort="+sort;
 	//首页
 	$("#page a:eq(0)").click(function(){
 		$("#pageIndex").val("");
