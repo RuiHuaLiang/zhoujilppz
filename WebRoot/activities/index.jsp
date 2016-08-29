@@ -16,12 +16,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="<%=path%>/activities/js/jquery-2.1.4.js"></script>
 	<script src="<%=path%>/activities/js/main.js"></script>
 	<script src="<%=path%>/activities/js/categoryManage.js"></script>
+	<script src="<%=path%>/activities/js/carHandle.js"></script>
 </head>
 <body>
 	<input type="hidden" value="<%=path%>" id = "path">
+	<input type="hidden" value="${user.userId}" id = "userId">
 	<div id="rightToolBar">
 		<ul>
-			<li><a href="#">购物车</a><span class="circleRed">
+			<li><a href="#">购物车</a><span class="circleRed" id="carSize">
 				<c:if test="${!empty carItems}">
 					${carItems.size()}
 				</c:if>
@@ -102,7 +104,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div id="shoppingCar">
 					<a href="#" class="shoppingLineHeight">购物车</a>
 					<span class="shoppingLineHeight">&gt;</span>
-					<span class="shoppingLineHeight">
+					<span class="shoppingLineHeight" id="carItemSize">
 						<c:if test="${!empty carItems}">
 							${carItems.size()}
 						</c:if>
@@ -115,12 +117,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<div id="itemHead">
 							最新加入的商品
 						</div>
-						<table id="goodsItem" width="320px">
+						<table id="goodsItem" width="330px">
 							<tr>
 								<th width="40px">简图</th>
 								<th width="200px">商品名</th>
 								<th width="40px">数量</th>
 								<th width="40px">单价</th>
+								<th width="40px">移除</th>
 							</tr>
 							
 							<c:set var="sum" value="0"></c:set>
@@ -131,6 +134,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<th><a href="<%=path%>/GoodsServlet?command=goodsInfo&goodsId=${item.goodsId}">${item.goodsName}</a></th>
 									<th><span class="redColor inline">${item.goodsNum}</span></th>
 									<th><span class="redColor inline">￥${item.goodsPrice}</span></th>
+									<th><input type="hidden" value="${item.carId}:${item.goodsId}:${user.userId}:${item.goodsNum}:${item.goodsPrice}"/><a href="javascript:;" class="deleteCarItem">移除</a></th>
 								</tr>	
 								<c:set var="sum" value="${sum+(item.goodsPrice*item.goodsNum)}"></c:set>
 								<c:set var="itemCount" value="${itemCount+item.goodsNum}"></c:set>
@@ -139,8 +143,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</table>
 
 						<p class="right" style="margin-right: 15px ;color: white">
-							共 <span class="redColor inline"> ${itemCount}</span> 件商品，共计
-							<span class="redColor inline">￥ ${sum}</span>
+							共 <span class="redColor inline" id="goodsItemNum"> ${itemCount}</span> 件商品，共计
+							<span class="redColor inline" id="goodsCount">￥ ${sum}</span>
 						</p>
 						<div class="clear"></div>
 						<div id="count"><a href="#">去购物车结算</a></div>

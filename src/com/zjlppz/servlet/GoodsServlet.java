@@ -17,6 +17,7 @@ import com.zjlppz.bean.Goods ;
 import com.zjlppz.bean.User ;
 import com.zjlppz.bean.viewbean.CategoryGoods ;
 import com.zjlppz.dao.GoodsDaoImpl ;
+import com.zjlppz.services.CarsService ;
 import com.zjlppz.services.GoodsService ;
 import com.zjlppz.services.IndexService ;
 import com.zjlppz.util.PageUtil ;
@@ -79,6 +80,7 @@ public class GoodsServlet extends HttpServlet
 		Integer  goodsId = Integer.parseInt ( request.getParameter ( "goodsId" ));
 		GoodsService goodsService = new GoodsService ( );
 		IndexService indexService = new IndexService ( ) ;
+		CarsService carsService = new CarsService ( );
 		//获取登录Session
 		HttpSession session = request.getSession ( ) ;
 		
@@ -87,7 +89,7 @@ public class GoodsServlet extends HttpServlet
 			//购物车
 			List < Car > carItems ;
 			
-			carItems = indexService.getCarItems ( ( User ) session.getAttribute ( "user" ) ) ;
+			carItems = carsService.getCarItems ( ( User ) session.getAttribute ( "user" ) ) ;
 			
 			request.setAttribute ( "carItems" , carItems ) ;
 			
@@ -178,13 +180,14 @@ public class GoodsServlet extends HttpServlet
 		HttpSession session = request.getSession ( ) ;
 		
 		GoodsService goodsService = new GoodsService();
-		IndexService indexService = new IndexService ( ) ;
+		CarsService carsService = new CarsService ( );
+		
 		List < Car > carItems;
 		
 		try
 		{
 			//购物车
-			carItems  = indexService.getCarItems ( ( User ) session.getAttribute ( "user" ) ) ;
+			carItems  = carsService.getCarItems ( ( User ) session.getAttribute ( "user" ) ) ;
 			request.setAttribute ( "carItems" , carItems ) ;
 			
 			//类别商品
@@ -282,11 +285,12 @@ public class GoodsServlet extends HttpServlet
 			IOException
 	{
 		HttpSession session = request.getSession ( ) ;
-		IndexService indexService = new IndexService ( ) ;
+		CarsService carsService = new CarsService ( );
+		
 		List < Car > carItems;
 		try
 		{
-			carItems  = indexService
+			carItems  = carsService
 					.getCarItems ( ( User ) session.getAttribute ( "user" ) ) ;
 			request.setAttribute ( "carItems" , carItems ) ;
 		

@@ -25,6 +25,11 @@
     <servlet-name>GoodsServlet</servlet-name>
     <servlet-class>com.zjlppz.servlet.GoodsServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>CarsServlet</servlet-name>
+    <servlet-class>com.zjlppz.servlet.CarsServlet</servlet-class>
+  </servlet>
+
 
 
 
@@ -49,6 +54,10 @@
   <servlet-mapping>
     <servlet-name>GoodsServlet</servlet-name>
     <url-pattern>/GoodsServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CarsServlet</servlet-name>
+    <url-pattern>/CarsServlet</url-pattern>
   </servlet-mapping>
   
   

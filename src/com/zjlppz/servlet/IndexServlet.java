@@ -14,6 +14,7 @@ import com.zjlppz.bean.Car ;
 import com.zjlppz.bean.Category ;
 import com.zjlppz.bean.User ;
 import com.zjlppz.bean.viewbean.CategoryGoods ;
+import com.zjlppz.services.CarsService ;
 import com.zjlppz.services.GoodsService ;
 import com.zjlppz.services.IndexService ;
 
@@ -43,6 +44,8 @@ public class IndexServlet extends HttpServlet
 		session.setAttribute ( "user" , user);
 		IndexService indexService = new IndexService ( );
 		GoodsService goodsService = new GoodsService();
+		CarsService carsService = new CarsService ( );
+		
 		List < Car > carItems ;
 		try
 		{
@@ -52,17 +55,20 @@ public class IndexServlet extends HttpServlet
 			{
 				sUser = (User)sessionUser;
 			}
-			carItems = indexService.getCarItems ( sUser ) ;
+			carItems = carsService.getCarItems ( sUser ) ;
 //			System.out.println (carItems) ;
+			
 			request.setAttribute ( "carItems" , carItems );
 			
 			List<Category> categorys = indexService.getCategory ( null );
 			request.setAttribute ( "categorys" , categorys );
 			
-			List<CategoryGoods> categoryGoods = goodsService.getCategoryGoods ( null , 1 , 5 );
+			String sort = request.getParameter ( "sort" ) ;
+			
+			List<CategoryGoods> categoryGoods = goodsService.getCategoryGoods ( null , 1 , 5 , sort);
 			request.setAttribute ( "categoryGoods" , categoryGoods );
 			
-		} catch ( Exception e )
+		} catch ( Exception e )  
 		{
 			e.printStackTrace();
 		}

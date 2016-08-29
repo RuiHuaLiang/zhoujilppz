@@ -182,7 +182,7 @@ public class GoodsService
 			return GoodsDaoImpl.ORDER_DEFAULT ;
 		} else if ( "sales".equals ( sort ) )
 		{
-			return GoodsDaoImpl.ORDER_SALES_ASC ;
+			return GoodsDaoImpl.ORDER_SALES_DESC ;
 		} else if ( "price".equals ( sort ) )
 		{
 			return GoodsDaoImpl.ORDER_PRICE_ASC ;

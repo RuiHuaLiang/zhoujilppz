@@ -290,6 +290,9 @@ body{
 #goodsItem tr a{
 	color: white;
 }
+#goodsItem tr a:hover{
+	color:red;
+}
 #goodsItem tr td,th {
 	text-align: center;
 	color: white;

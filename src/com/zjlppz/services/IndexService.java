@@ -25,22 +25,7 @@ public class IndexService
 	CategoryDaoImpl categoryDao = new CategoryDaoImpl ( ) ;
 	GoodsDaoImpl goodsDao = new GoodsDaoImpl ( ) ;
 
-	/**
-	 * 获取购物车的商品数
-	 * 
-	 * @param user
-	 *            用户对象
-	 * @return 商品数
-	 * @throws Exception
-	 */
-	public List < Car > getCarItems ( User user ) throws Exception
-	{
-		if(user != null)
-		{
-			return carDao.getUserCars ( user ) ;
-		}
-		return null;
-	}
+	
 
 	/**
 	 * 获取商品类别
